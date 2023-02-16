@@ -12,22 +12,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.minidev.json.annotate.JsonIgnore;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
-@AllArgsConstructor
+
 public class ProjectDto {
 
     protected String name;
-    Set<Issue> issues= new HashSet<>();
-    protected boolean enabled=true;
-    protected Date dateCreated;
+    protected LocalDate dateCreated;
     protected String code;
     protected String description;
     protected Person creator;
 
-
+    public ProjectDto(String name, String code, String description, Person creator) {
+        this.name = name;
+        this.dateCreated = LocalDate.now();
+        this.code = code;
+        this.description = description;
+        this.creator = creator;
+    }
 }

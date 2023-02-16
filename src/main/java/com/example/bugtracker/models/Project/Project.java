@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,14 +34,12 @@ public class Project {
     @JoinColumn(name = "creator_id", nullable = false)
     Person creator;
 
-    public Project(Long id, ProjectDto projectDto) {
-        this.id = id;
+    public Project(ProjectDto projectDto) {
         this.name = projectDto.name;
-        this.issues = projectDto.issues;
         this.code = projectDto.code;
-        this.dateCreated = projectDto.dateCreated;
+        this.dateCreated = Date.from(Instant.now());
         this.description = projectDto.description;
-        this.enabled = projectDto.enabled;
+        this.enabled = true;
         this.creator= projectDto.creator;
     }
 }

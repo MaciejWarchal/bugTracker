@@ -20,6 +20,5 @@ public class IssueDto {
     Person creator;
     Person assignee;
     Date dateCreated;
-    Date lastUpdate;
     List<Comment> comments;
 }

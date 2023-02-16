@@ -1,0 +1,17 @@
+body{
+
+    background: rgb(32, 33, 36)
+
+}
+font{
+    color: white;
+}
+H1{
+    font-size: large; color: white; alignment: center;
+}
+[class*="container-"]{
+    background: black;
+    border: 1px solid white;
+    text-align: center;
+
+}

@@ -54,7 +54,7 @@ public class Issue {
             @JsonIgnoreProperties("issue")
     private List<Comment> comments;
 
-    public Issue(Long id, IssueDto issueDto) {
+    public Issue(Long id,Date lastUpdate, IssueDto issueDto) {
         this.id = id;
         this.status = issueDto.status;
         this.priority = issueDto.priority;
@@ -66,7 +66,7 @@ public class Issue {
         //this.creator = issueDto.creator;
         //this.assignee = issueDto.assignee;
         this.dateCreated = issueDto.dateCreated;
-        this.lastUpdate = issueDto.lastUpdate;
+        this.lastUpdate = lastUpdate;
         //this.comments = issueDto.comments;
     }
 }

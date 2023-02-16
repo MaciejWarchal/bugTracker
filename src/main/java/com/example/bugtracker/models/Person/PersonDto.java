@@ -13,7 +13,6 @@ import java.util.Set;
 public class PersonDto {
 
     String login;
-    String password;
     String userRealName;
     Set<Authority> authorities;
 }

@@ -26,10 +26,10 @@ public class Person {
                         inverseJoinColumns = @JoinColumn(name = "authority_id"))
     Set<Authority> authorities;
 
-    public Person(Long id, PersonDto personDto) {
+    public Person(Long id,String password, PersonDto personDto) {
         this.id = id;
         this.login = personDto.login;
-        this.password = personDto.password;
+        this.password = password ;
         this.userRealName = personDto.userRealName;
         this.authorities = personDto.authorities;
     }
