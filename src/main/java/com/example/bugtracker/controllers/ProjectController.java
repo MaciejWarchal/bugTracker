@@ -11,6 +11,7 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -34,26 +35,17 @@ public class ProjectController {
         return projectService.getOne(id);
     }
 
-    @PostMapping("/create")
-    public Project createProject(@RequestParam String name,@RequestParam String code
-            ,@RequestParam String description,@RequestParam Person creator){
-        ProjectDto projectDto=new ProjectDto(name,code,description,creator);
-        Project project=new Project(projectDto);
-        return projectService.create(project);
+    @GetMapping("/create")
+    ModelAndView create() {
+        ModelAndView modelAndView = new ModelAndView("projects/addProject");
+
+        Project project = new Project();
+        modelAndView.addObject("project", project);
+
+        return modelAndView;
     }
 
 
-    private Long id;
-    protected String name;
-    @OneToMany(mappedBy = "project")
-    Set<Issue> issues= new HashSet<>();
-    protected boolean enabled=true;
-    protected LocalDate dateCreated;
-    protected String code;
-    protected String description;
-    @ManyToOne
-    @JoinColumn(name = "creator_id", nullable = false)
-    Person creator;
 
 
 

@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org " lang="en" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org
+http://www.thymeleaf.org  ">
 <head>
     <meta charset="UTF-8">
     <title>ADD NEW USER</title>
-  <link href="style.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <H1>User creator</H1>
-    <form th:acion="(@/person)">
-        <p>User name:<input type="text" NAME="userName"></p>
-        <p>User login:<input type="text" NAME="userLogin"></p>
-        <p>User password:<input type="text" NAME="userPassword"></p>
-        <p>User authority:<input type="text" NAME="userAuthority"></p>
-        <p><input type="submit" value="addNewUser"> </p>
-    </form>
+<H1>User creator</H1>
+<form th:acion="@(/personCreate)">
+    <p>User name:<input type="text" NAME="userName"></p>
+    <p>User login:<input type="text" NAME="userLogin"></p>
+    <p>User password:<input type="text" NAME="userPassword"></p>
+    <p>User authority:<input type="text" NAME="userAuthority"></p>
+    <p><input type="submit" value="addNewUser"></p>
+</form>
 </body>
 </html>

@@ -14,7 +14,7 @@ public class PersonController {
 
     private final PersonService personService;
 
-    @PostMapping
+    @PostMapping("/personAdd")
     // person service czy POJO?
     public PersonService addUser(@ModelAttribute PersonService personService){
         return personService;
