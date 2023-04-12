@@ -30,6 +30,15 @@ public class ProjectController {
         return projectService.getAll();
     }
 
+    @GetMapping
+    ModelAndView index() {
+        ModelAndView modelAndView = new ModelAndView("projects/index");
+
+        modelAndView.addObject("project", projectService.getAll());
+        return modelAndView;
+    }
+
+
     @GetMapping("{id}")
     public Project getOne(@PathVariable Long id){
         return projectService.getOne(id);

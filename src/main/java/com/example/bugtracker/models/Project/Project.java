@@ -34,12 +34,14 @@ public class Project {
     @JoinColumn(name = "creator_id", nullable = false)
     Person creator;
 
-    public Project(ProjectDto projectDto) {
+
+
+    /* public Project(ProjectDto projectDto) {
         this.name = projectDto.name;
         this.code = projectDto.code;
         this.dateCreated = Date.from(Instant.now());
         this.description = projectDto.description;
         this.enabled = true;
         this.creator= projectDto.creator;
-    }
+    }*/
 }
