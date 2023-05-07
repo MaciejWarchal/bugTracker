@@ -32,7 +32,7 @@ public class ProjectController {
 
     @GetMapping
     ModelAndView index() {
-        ModelAndView modelAndView = new ModelAndView("projects/index");
+        ModelAndView modelAndView = new ModelAndView("projects1/index");
 
         modelAndView.addObject("project", projectService.getAll());
         return modelAndView;
@@ -46,13 +46,28 @@ public class ProjectController {
 
     @GetMapping("/create")
     ModelAndView create() {
-        ModelAndView modelAndView = new ModelAndView("projects/addProject");
+        ModelAndView modelAndView = new ModelAndView("projects1/addProject");
 
         Project project = new Project();
         modelAndView.addObject("project", project);
 
         return modelAndView;
     }
+
+    @PostMapping("/save")
+    String save(@ModelAttribute Project project) {
+
+        boolean isNew = project.getId() == null;
+
+        projectService.save(project);
+
+        if (isNew) {
+            return "redirect:/projects";
+        } else {
+            return "redirect:/projects/edit/" + project.getId();
+        }
+    }
+
 
 
 

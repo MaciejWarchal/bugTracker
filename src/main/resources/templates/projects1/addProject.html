@@ -18,6 +18,25 @@
         Edycja projektu <span th:text="${project.code}"></span>
     </h1>
 
+    <form th:action="@{/projects/save}" th:object="${project}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+
+        <p> project name:<input type="text" class="form-control" id="project-name" th:field="*{name}"> </p>
+        <p> project code:<input type="text" class="form-control" id="project-code" th:field="*{code}"> </p>
+        <p> project description:<input type="text" class="form-control" id="project-description" th:field="*{description}"> </p>
+        <p> project creator id:<input type="text" class="form-control" id="project-creator id" th:field="*{creator}"> </p>
+
+
+
+
+        <button type="submit" class="btn btn-primary">
+            save
+        </button>
+    </form>
+
+
+
 
 
 test

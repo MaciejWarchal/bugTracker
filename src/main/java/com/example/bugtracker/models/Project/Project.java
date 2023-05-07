@@ -31,7 +31,7 @@ public class Project {
     protected String code;
     protected String description;
     @ManyToOne
-    @JoinColumn(name = "creator_id", nullable = false)
+    @JoinColumn(name = "creator_id", nullable = true)
     Person creator;
 
 

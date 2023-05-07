@@ -18,7 +18,7 @@ import java.util.Optional;
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
-    private final PersonRepository personRepository;
+
 
 
     public Iterable<Project> getAll(){
@@ -44,6 +44,8 @@ public class ProjectService {
     public void delete(Long id){
         projectRepository.deleteById(id);
     }
+
+    public Project save(Project project){return projectRepository.save(project);}
 
 
 
