@@ -1,13 +1,16 @@
 body{
 
-    background: rgb(32, 33, 36)
+    background-color: brown;
 
 }
+div{
+    border: chartreuse;
+}
 font{
-    color: white;
+    color: green;
 }
 H1{
-    font-size: large; color: white; alignment: center;
+    font-size: large; color: gold; alignment: center;
 }
 [class*="container-"]{
     background: black;

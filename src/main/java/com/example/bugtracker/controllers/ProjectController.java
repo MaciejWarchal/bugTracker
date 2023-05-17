@@ -68,6 +68,14 @@ public class ProjectController {
         }
     }
 
+    @GetMapping("/edit/{id}")
+    ModelAndView edit(@PathVariable Long id){
+        ModelAndView modelAndView= new ModelAndView("projects1/addProject");
+        Project project= projectService.getOne(id);
+        modelAndView.addObject("project",project);
+        return modelAndView;
+    }
+
 
 
 

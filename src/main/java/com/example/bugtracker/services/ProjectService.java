@@ -26,8 +26,7 @@ public class ProjectService {
     }
 
     public Project getOne(@PathVariable Long id){
-        return projectRepository.findById(id).
-                orElseThrow(ResourceNotFoundException::new);
+        return projectRepository.findById(id).orElse(null);
 
     }
 
