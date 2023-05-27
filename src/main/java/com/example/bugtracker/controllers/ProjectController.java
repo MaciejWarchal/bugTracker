@@ -76,6 +76,16 @@ public class ProjectController {
         return modelAndView;
     }
 
+    @DeleteMapping("/delete/{id}")
+            void delete(@ModelAttribute Project project,@PathVariable Long id) {
+        boolean found = project.getId()==null;
+
+        if (!found){
+            projectService.delete(id);
+        }
+
+    }
+
 
 
 
