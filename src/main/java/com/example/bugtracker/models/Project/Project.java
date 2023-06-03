@@ -1,5 +1,6 @@
 package com.example.bugtracker.models.Project;
 
+import com.example.bugtracker.enums.Status;
 import com.example.bugtracker.models.Issue.Issue;
 import com.example.bugtracker.models.Person.Person;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -30,18 +31,20 @@ public class Project {
     protected Date dateCreated;
     protected String code;
     protected String description;
+    protected Date updated;
     @ManyToOne
     @JoinColumn(name = "creator_id", nullable = true)
     Person creator;
-
-
-
-    /* public Project(ProjectDto projectDto) {
-        this.name = projectDto.name;
-        this.code = projectDto.code;
+    @Enumerated(EnumType.STRING)
+    protected Status status=Status.ToDo;
+    public Project(String name, String code, String description, Person creator) {
+        this.name = name;
         this.dateCreated = Date.from(Instant.now());
-        this.description = projectDto.description;
-        this.enabled = true;
-        this.creator= projectDto.creator;
-    }*/
+        this.code = code;
+        this.description = description;
+        this.creator = creator;
+        this.status = Status.ToDo;
+    }
+
+
 }

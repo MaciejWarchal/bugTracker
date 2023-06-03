@@ -1,34 +1,130 @@
-body{
+body {
     background-color: black;
-}
-main{
-    background-color: black;
+    border: none;
+    font-family: "Courier New", Courier, monospace;
+
 }
 
-div{
-    border-style: inset;
-    border-spacing: initial;
-    border-color: gray;
+main {
+    background-color: black;
+    border: none;
+}
+
+div.class-row {
+    background-color: black;
+    border-style: solid;
+    border-color: white;
+    border-radius: 25px;
+    display: flex;
+}
+
+.card-title,
+.card-text {
+    color: white;
+}
+
+div.card-body {
+    background-color: black;
+    border-style: solid;
+    border-color: white;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+div.mb-3 {
+    background-color: black;
+    border-style: solid;
+    border-color: white;
+    border-radius: 25px;
+    overflow: hidden;
+
+}
+
+span.fa-bug {
+    color: red;
+    font-size: 500%;
+}
+
+div {
+    border: none;
     margin-outside: 5%;
     padding: 2%;
 
-}
-font{
-    font-style: oblique;
-    color: aliceblue;
-    font-family: "JetBrains Mono ExtraBold";
-
-}
-H1{
-    font-size: large; color: white; text-align: center;
-}
-[class*="container-"]{
     background-color: black;
-    border: 1px solid white;
-    text-align: center;
 
+
+    justify-content: space-between;
+}
+div.container {
+
+    margin-outside: 5%;
+    padding: 2%;
+    border: none;
+
+    background-color: black;
 }
 
-[class*="btn-secondary"]{
-    width: 10%;
+font {
+    font-style: oblique;
+    color: white;
+    font-family: "JetBrains Mono ExtraBold";
+}
+
+h1 {
+    font-size: large;
+    color: white;
+    text-align: center;
+}
+
+h5 {
+    font-size: large;
+    color: white;
+    text-align: center;
+}
+
+[class*="container-"] {
+    background-color: black;
+    border: none;
+    text-align: center;
+}
+[class*="col-"] {
+    background-color: black;
+}
+
+div.card {
+    background-color: black;
+    border-style: solid;
+    border-color: white;
+    border-radius: 25px;
+    color: white;
+    margin-left: 3%;
+    margin-right: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+}
+div.card-inner{
+    background-color: black;
+    border-style: solid;
+    border-color: white;
+    border-radius: 25px;
+    color: white;
+    margin-bottom: 10%;
+    margin-top: 10%;
+}
+span.row-count {
+    background-color: darkslategray;
+    color: black;
+    border-radius: 50%;
+    padding: 5px 8px;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

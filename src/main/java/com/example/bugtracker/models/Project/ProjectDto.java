@@ -1,5 +1,6 @@
 package com.example.bugtracker.models.Project;
 
+import com.example.bugtracker.enums.Status;
 import com.example.bugtracker.models.Issue.Issue;
 import com.example.bugtracker.models.Person.Person;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,6 +28,7 @@ public class ProjectDto {
     protected String code;
     protected String description;
     protected Person creator;
+    protected Status status;
 
     public ProjectDto(String name, String code, String description, Person creator) {
         this.name = name;
@@ -34,5 +36,6 @@ public class ProjectDto {
         this.code = code;
         this.description = description;
         this.creator = creator;
+        this.status = Status.ToDo;
     }
 }
