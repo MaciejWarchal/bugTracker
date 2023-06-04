@@ -1,5 +1,6 @@
 package com.example.bugtracker.controllers;
 
+import com.example.bugtracker.enums.Status;
 import com.example.bugtracker.models.Issue.Issue;
 import com.example.bugtracker.models.Person.Person;
 import com.example.bugtracker.models.Project.Project;
@@ -66,6 +67,14 @@ public class ProjectController {
         } else {
             return "redirect:/projects/edit/" + project.getId();
         }
+    }
+
+    @GetMapping("/update")
+    String update(@PathVariable Long id,@PathVariable String status) {
+        Project project=projectService.getOne(id);
+        project.setStatus(Status.valueOf(status));
+        projectService.save(project);
+        return "redirect:/projects";
     }
 
     @GetMapping("/edit/{id}")

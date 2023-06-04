@@ -40,10 +40,11 @@ div.mb-3 {
 
 }
 
-span.fa-bug {
+.bug-icon {
+    font-size: 500%; /* Adjust the size as desired */
     color: red;
-    font-size: 500%;
 }
+
 
 div {
     border: none;
