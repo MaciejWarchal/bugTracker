@@ -35,7 +35,7 @@ public class ProjectController {
     ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("projects1/index");
 
-        modelAndView.addObject("project", projectService.getAll());
+        modelAndView.addObject("projects", projectService.getAll());
         return modelAndView;
     }
 
@@ -51,7 +51,6 @@ public class ProjectController {
 
         Project project = new Project();
         modelAndView.addObject("project", project);
-
         return modelAndView;
     }
 
@@ -59,27 +58,34 @@ public class ProjectController {
     String save(@ModelAttribute Project project) {
 
         boolean isNew = project.getId() == null;
+        boolean statusChanged = true;
+
+        if (project.getId() != null) {
+            statusChanged = project.getStatus() != projectService.getOne(project.getId()).getStatus() || project.getStatus() != null;
+        }
 
         projectService.save(project);
 
         if (isNew) {
+            return "redirect:/projects";
+        } else if (statusChanged) {
             return "redirect:/projects";
         } else {
             return "redirect:/projects/edit/" + project.getId();
         }
     }
 
-    @GetMapping("/update")
-    String update(@PathVariable Long id,@PathVariable String status) {
-        Project project=projectService.getOne(id);
-        project.setStatus(Status.valueOf(status));
-        projectService.save(project);
-        return "redirect:/projects";
-    }
 
     @GetMapping("/edit/{id}")
     ModelAndView edit(@PathVariable Long id){
         ModelAndView modelAndView= new ModelAndView("projects1/addProject");
+        Project project= projectService.getOne(id);
+        modelAndView.addObject("project",project);
+        return modelAndView;
+    }
+    @GetMapping("/changeStatus/{id}")
+    ModelAndView changeStatus(@PathVariable Long id){
+        ModelAndView modelAndView= new ModelAndView("projects1/changeStatus");
         Project project= projectService.getOne(id);
         modelAndView.addObject("project",project);
         return modelAndView;
@@ -94,13 +100,5 @@ public class ProjectController {
         }
 
     }
-
-
-
-
-
-
-
-
 
 }

@@ -12,30 +12,45 @@
 <div class="container">
 
     <h1 th:if="${project.id == null}">
-        Nowy projekt
+        Project not found
     </h1>
     <h1 th:if="${project.id != null}">
-        Edycja projektu <span th:text="${project.code}"></span>
+        Status change <span th:text="${project.code}"></span>
     </h1>
 
     <form th:action="@{/projects/save}" th:object="${project}" method="post">
         <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{name}">
+        <input type="hidden" th:field="*{code}">
+        <input type="hidden" th:field="*{description}">
+        <input type="hidden" th:field="*{creator}">
 
 
 
-        <p> project name:<input type="text" class="form-control" id="project-name" th:field="*{name}"> </p>
-        <p> project code:<input type="text" class="form-control" id="project-code" th:field="*{code}"> </p>
-        <p> project description:<input type="text" class="form-control" id="project-description" th:field="*{description}"> </p>
-        <p> project creator id:<input type="text" class="form-control" id="project-creator id" th:field="*{creator}"> </p>
+
+        <select th:field="*{status}">
+            <option th:value="'ToDo'" th:text="ToDo"></option>
+            <option th:value="'InProgress'" th:text="InProgress"></option>
+            <option th:value="'Fixed'" th:text="Fixed"></option>
+            <option th:value="'Closed'" th:text="Closed"></option>
+        </select>
+
+
+
 
 
 
 
         <button type="submit" class="btn btn-primary">
-            save
+            change
         </button>
     </form>
 
+
+
+
+
+test
 </div>
 
 </body>
