@@ -1,5 +1,6 @@
 package com.example.bugtracker.models.Issue;
 
+import com.example.bugtracker.enums.Status;
 import com.example.bugtracker.models.Comment.Comment;
 import com.example.bugtracker.models.Person.Person;
 import lombok.Data;
@@ -17,6 +18,7 @@ public class IssueDto {
     String name;
     String descdription;
     String code;
+    Boolean enabled;
     Person creator;
     Person assignee;
     Date dateCreated;

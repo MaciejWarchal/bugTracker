@@ -2,6 +2,7 @@ body {
     background-color: black;
     border: none;
     font-family: "Courier New", Courier, monospace;
+    ;
 
 }
 
@@ -21,6 +22,7 @@ div.class-row {
 .card-title,
 .card-text {
     color: white;
+    display: flex;
 }
 
 div.card-body {
@@ -37,7 +39,16 @@ div.mb-3 {
     border-color: white;
     border-radius: 25px;
     overflow: hidden;
+}
 
+div.col-mb-6 {
+    background-color: black;
+    border-style: solid;
+    border-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
 }
 
 .bug-icon {
@@ -48,22 +59,31 @@ div.mb-3 {
 
 div {
     border: none;
-    margin-outside: 5%;
-    padding: 2%;
+    padding: 3%;
+    background-color: black;
+}
 
+div.issue {
+    border: none;
+    padding : 6%;
     background-color: black;
 
 
-    justify-content: space-between;
 }
 div.container {
 
-    margin-outside: 5%;
     padding: 2%;
     border: none;
-
     background-color: black;
 }
+
+div.containerIssue {
+
+    padding: 5%;
+    border: none;
+    background-color: black;
+}
+
 
 font {
     font-style: oblique;
@@ -114,6 +134,16 @@ div.card-inner{
     color: white;
     margin-bottom: 10%;
     margin-top: 10%;
+}
+
+div.card-innerLOP {
+    background-color: black;
+    border-style: solid;
+    border-color: white;
+    border-radius: 15px;
+    color: white;
+    margin-bottom: 1%;
+    margin-top: 1%;
 }
 span.row-count {
     background-color: darkslategray;

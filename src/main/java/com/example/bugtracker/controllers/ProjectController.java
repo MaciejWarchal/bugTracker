@@ -27,6 +27,11 @@ public class ProjectController {
     private final ProjectService projectService;
 
     @GetMapping("/list")
+    ModelAndView modelAndView() {
+        ModelAndView modelAndView = new ModelAndView("projects1/listOfProjects");
+        modelAndView.addObject("projects", projectService.getAll());
+        return modelAndView;
+    }
     public Iterable<Project> getAll(){
         return projectService.getAll();
     }
@@ -59,9 +64,13 @@ public class ProjectController {
 
         boolean isNew = project.getId() == null;
         boolean statusChanged = true;
+        boolean enabledChanged = true;
 
         if (project.getId() != null) {
             statusChanged = project.getStatus() != projectService.getOne(project.getId()).getStatus() || project.getStatus() != null;
+        }
+        if (project.getId() != null) {
+            enabledChanged = project.isEnabled() != projectService.getOne(project.getId()).isEnabled() || project.isEnabled() != true;
         }
 
         projectService.save(project);
@@ -69,6 +78,8 @@ public class ProjectController {
         if (isNew) {
             return "redirect:/projects";
         } else if (statusChanged) {
+            return "redirect:/projects";
+        } else if (enabledChanged) {
             return "redirect:/projects";
         } else {
             return "redirect:/projects/edit/" + project.getId();
@@ -91,14 +102,14 @@ public class ProjectController {
         return modelAndView;
     }
 
-    @DeleteMapping("/delete/{id}")
-            void delete(@ModelAttribute Project project,@PathVariable Long id) {
-        boolean found = project.getId()==null;
-
-        if (!found){
-            projectService.delete(id);
-        }
-
+    @GetMapping("/delete/{id}")
+    ModelAndView delete(@PathVariable Long id){
+        ModelAndView modelAndView= new ModelAndView("projects1/delete");
+        Project project= projectService.getOne(id);
+        modelAndView.addObject("project",project);
+        return modelAndView;
     }
+
+
 
 }

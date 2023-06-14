@@ -18,21 +18,36 @@
     <div class="container">
         <span class="fas fa-bug bug-icon"></span>
 
-        <h1>bugTracker</h1>
+        <h1>bugTracker Projects</h1>
         <div class="row mb-1">
-            <div class="col-6">
-                <div class="d-flex justify-content-end">
+
+            <div class="col-md-3">
+                <div class="d-flex justify-content-center">
                     <a th:href="@{projects/create}" class="btn btn-secondary" style="white-space: nowrap;">New Project</a>
                 </div>
+
+            </div><div class="col-md-3">
+                <div class="d-flex justify-content-center">
+                    <a th:href="@{issues}" class="btn btn-secondary" style="white-space: nowrap;">Go To Issues table</a>
+                </div>
             </div>
-            <div class="col-6">
-                <div class="d-flex justify-content-start">
+
+            <div class="col-md-3">
+                <div class="d-flex justify-content-center">
+                    <a th:href="@{projects/list}" class="btn btn-secondary" style="white-space: nowrap;">List Projects</a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="d-flex justify-content-center">
                     <a th:href="@{person/create}" class="btn btn-secondary" style="white-space: nowrap;">New User</a>
                 </div>
             </div>
         </div>
 
         <div class="row">
+
+
             <div class="col-6 col-md-3">
                 <div class="card mb-3">
 
@@ -41,7 +56,8 @@
                     </h5>
 
                     <div>
-                        <div class="card-inner" th:block th:if="${project.status.toString() == 'ToDo'}" th:each="project: ${projects}">
+                        <div class="card-inner" th:block th:if="${project.status.toString() == 'ToDo' && project.enabled==true}"
+                             th:each="project: ${projects}">
 
                                 <p th:text="${project.code}"></p>
                                 <p th:text="${project.name}"></p>
@@ -54,10 +70,6 @@
 
 
 
-
-
-
-
             <div class="col-6 col-md-3">
                 <div class="card mb-3">
 
@@ -66,7 +78,8 @@
                     </h5>
 
                     <div>
-                        <div class="card-inner" th:block th:each="project: ${projects}" th:if="${project.status.toString() == 'InProgress'}">
+                        <div class="card-inner" th:block th:each="project: ${projects}"
+                             th:if="${project.status.toString() == 'InProgress' && project.enabled==true}">
 
                             <p th:text="${project.code}"></p>
                             <p th:text="${project.name}"></p>
@@ -86,7 +99,8 @@
                     </h5>
 
                     <div>
-                        <div class="card-inner" th:block th:each="project: ${projects}" th:if="${project.status.toString() == 'Fixed'}">
+                        <div class="card-inner" th:block th:each="project: ${projects}"
+                             th:if="${project.status.toString() == 'Fixed'&& project.enabled==true}">
 
                             <p th:text="${project.code}"></p>
                             <p th:text="${project.name}"></p>
@@ -108,7 +122,8 @@
                     </h5>
 
                     <div>
-                        <div class="card-inner" th:block th:each="project: ${projects}" th:if="${project.status.toString() == 'Closed'}">
+                        <div class="card-inner" th:block th:each="project: ${projects}"
+                             th:if="${project.status.toString() == 'Closed'&& project.enabled==true}">
 
                             <p th:text="${project.code}"></p>
                             <p th:text="${project.name}"></p>
