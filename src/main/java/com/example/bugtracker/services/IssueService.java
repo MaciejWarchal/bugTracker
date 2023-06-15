@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,12 +25,26 @@ public class IssueService {
 
 
 
-    public Iterable<Issue> getAll(){
-        return issueRepository.findAll();
+    public Iterable<Issue> getAll() {
+        List<Issue> issues = new ArrayList<>();
+
+        for (Issue issue : issueRepository.findAll()) {
+
+            if (issue.getEnabled()==true) {
+                issues.add(issue);
+            }
+        }
+
+        return issues;
     }
 
     public Issue getOne(@PathVariable Long id){
-        return issueRepository.findById(id).orElse(null);
+        Issue issue= issueRepository.findById(id).orElse(null);
+        if(issue.getEnabled()==true){
+            return issue;
+        } else {
+            return null;
+        }
 
     }
 
