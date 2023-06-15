@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,12 +23,27 @@ public class ProjectService {
 
 
 
-    public Iterable<Project> getAll(){
-        return projectRepository.findAll();
+
+    public Iterable<Project> getAll() {
+        List<Project> projects = new ArrayList<>();
+
+        for (Project project : projectRepository.findAll()) {
+
+            if (project.isEnabled()) {
+                projects.add(project);
+            }
+        }
+
+        return projects;
     }
 
     public Project getOne(@PathVariable Long id){
-        return projectRepository.findById(id).orElse(null);
+        Project project= projectRepository.findById(id).orElse(null);
+        if(project.isEnabled()){
+            return project;
+        } else {
+            return null;
+        }
 
     }
 
@@ -34,11 +51,7 @@ public class ProjectService {
         return projectRepository.save(project);
     };
 
-    // do dokończenia
-    public Project update(Long id,Project project){
-        Project project1=getOne(id);
-        return project1;
-    }
+
 
     public void delete(Long id){
         projectRepository.deleteById(id);

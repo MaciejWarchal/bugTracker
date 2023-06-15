@@ -35,9 +35,9 @@
 
               <p th:text="${project.code}"></p>
               <p th:text="${project.name}"></p>
-              <div th:href="@{'edit/' + ${project.id}}" class="btn btn-secondary">edit</div>
-              <div th:href="@{'changeStatus/' + ${project.id}}" class="btn btn-secondary">change satus</div>
-              <div th:href="@{'delete/' + ${project.id}}" class="btn btn-secondary">Delete</div>
+              <a th:href="@{'edit/' + ${project.id}}" class="btn btn-secondary">edit</a>
+              <a th:href="@{'changeStatus/' + ${project.id}}" class="btn btn-secondary">change satus</a>
+              <a th:href="@{'delete/' + ${project.id}}" class="btn btn-secondary">Delete</a>
             </div>
 
         </div>
