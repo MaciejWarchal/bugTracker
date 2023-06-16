@@ -1,10 +1,12 @@
 package com.example.bugtracker.controllers;
 
 import com.example.bugtracker.enums.Status;
+import com.example.bugtracker.filters.ProjectFilter;
 import com.example.bugtracker.models.Issue.Issue;
 import com.example.bugtracker.models.Person.Person;
 import com.example.bugtracker.models.Project.Project;
 import com.example.bugtracker.models.Project.ProjectDto;
+import com.example.bugtracker.services.PersonService;
 import com.example.bugtracker.services.ProjectService;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -13,11 +15,16 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/projects")
@@ -25,22 +32,26 @@ import java.util.Set;
 public class ProjectController {
     // todo secure
     private final ProjectService projectService;
+    private final PersonService personService;
 
     @GetMapping("/list")
-    ModelAndView modelAndView() {
+    ModelAndView modelAndView(@ModelAttribute ProjectFilter filter, Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("projects1/listOfProjects");
-        modelAndView.addObject("projects", projectService.getAll());
+        Page<Project> projects = projectService.getAll(filter.buildSpecification(), pageable);
+        modelAndView.addObject("projects", projects);
+        List<Person> people = (List<Person>) personService.getAll();
+        modelAndView.addObject("people", people);
+
+        modelAndView.addObject("filter",filter);
         return modelAndView;
     }
-    public Iterable<Project> getAll(){
-        return projectService.getAll();
-    }
+
 
     @GetMapping
-    ModelAndView index() {
+    ModelAndView index(ProjectFilter filter) {
         ModelAndView modelAndView = new ModelAndView("projects1/index");
 
-        modelAndView.addObject("projects", projectService.getAll());
+        modelAndView.addObject("projects", projectService.getAll(filter));
         return modelAndView;
     }
 
