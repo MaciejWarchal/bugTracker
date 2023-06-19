@@ -121,6 +121,10 @@ public class ProjectController {
         return modelAndView;
     }
 
+    public String contact() {
+        return "contact";
+    }
+
 
 
 }

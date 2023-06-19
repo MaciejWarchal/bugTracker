@@ -1,24 +1,16 @@
+
+
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <style>
-        .box {
-            width: 200px;
-            height: 200px;
-            border: 2px solid black;
-            cursor: pointer;
-        }
-    </style>
+    <title>Thymeleaf JavaScript Test</title>
+    <script src="/js/hello.js"></script>
 </head>
 <body>
-<div id="myBox" class="box"></div>
-
-<script>
-    var box = document.getElementById('myBox');
-
-    box.addEventListener('click', function() {
-        box.style.borderColor = 'red';
-    });
+<h1 id="message-placeholder">Default Message</h1>
+<script th:inline="javascript">
+    var message = /*[[${message}]]*/ 'Default Message';
+    document.getElementById('message-placeholder').textContent = message;
 </script>
 </body>
 </html>

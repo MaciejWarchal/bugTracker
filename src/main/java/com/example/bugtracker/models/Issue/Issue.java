@@ -62,6 +62,7 @@ public class Issue {
     private List<Comment> comments;
 
     private Boolean enabled=true;
+    private String description;
 
 
 }

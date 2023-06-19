@@ -79,9 +79,9 @@ public class IssueController {
         modelAndView.addObject("issue",issue);
         return modelAndView;
     }
-    @GetMapping("/changeStatus/{id}")
-    ModelAndView changeStatus(@PathVariable Long id){
-        ModelAndView modelAndView= new ModelAndView("projects1/changeStatus");
+    @GetMapping("/changeIssueStatus/{id}")
+    ModelAndView changeIssueStatus(@PathVariable Long id){
+        ModelAndView modelAndView= new ModelAndView("projects1/changeIssueStatus");
         Issue issue= issueService.getOne(id);
         modelAndView.addObject("issue",issue);
         return modelAndView;
