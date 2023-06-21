@@ -6,6 +6,9 @@ import com.example.bugtracker.models.Project.Project;
 import com.example.bugtracker.repositories.AuthorityRepository;
 import com.example.bugtracker.services.PersonService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,11 +22,22 @@ public class PersonController {
     private final AuthorityRepository authorityRepository;
 
 
-    @GetMapping
-    ModelAndView index() {
-        ModelAndView modelAndView = new ModelAndView("projects1/index");
+    @GetMapping("/account")
+    ModelAndView account() {
+        ModelAndView modelAndView = new ModelAndView("projects1/myAccount");
 
-        modelAndView.addObject("person", personService.getAll());
+        // Pobierz autentykację (zalogowanego użytkownika)
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentname = null;
+        if (authentication != null && authentication.isAuthenticated()) {
+            // Sprawdź, czy autentykacja zawiera szczegóły użytkownika
+            if (authentication.getPrincipal() instanceof UserDetails) {
+                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+                currentname = userDetails.getUsername();
+            }
+        }
+
+        modelAndView.addObject("currentPerson", personService.getByName(currentname));
         return modelAndView;
     }
     @PostMapping("/personAdd")

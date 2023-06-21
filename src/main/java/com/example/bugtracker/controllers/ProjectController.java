@@ -12,6 +12,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,17 +37,7 @@ public class ProjectController {
     private final ProjectService projectService;
     private final PersonService personService;
 
-    @GetMapping("/list")
-    ModelAndView modelAndView(@ModelAttribute ProjectFilter filter, Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView("projects1/listOfProjects");
-        Page<Project> projects = projectService.getAll(filter.buildSpecification(), pageable);
-        modelAndView.addObject("projects", projects);
-        List<Person> people = (List<Person>) personService.getAll();
-        modelAndView.addObject("people", people);
 
-        modelAndView.addObject("filter",filter);
-        return modelAndView;
-    }
 
 
     @GetMapping
@@ -123,6 +116,33 @@ public class ProjectController {
 
     public String contact() {
         return "contact";
+    }
+
+    @GetMapping("/list")
+    ModelAndView modelAndView(@ModelAttribute ProjectFilter filter, Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("projects1/listOfProjects");
+
+        // Pobierz autentykację (zalogowanego użytkownika)
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentname = null;
+        if (authentication != null && authentication.isAuthenticated()) {
+            // Sprawdź, czy autentykacja zawiera szczegóły użytkownika
+            if (authentication.getPrincipal() instanceof UserDetails) {
+                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+                currentname = userDetails.getUsername();
+            }
+        }
+
+        // Przekazuj obecny użytkownik do widoku
+        modelAndView.addObject("currentname", currentname);
+
+        Page<Project> projects = projectService.getAll(filter.buildSpecification(), pageable);
+        modelAndView.addObject("projects", projects);
+        Person person = personService.getOne(personService.getByName(currentname).getId());
+        modelAndView.addObject("person", person);
+
+        modelAndView.addObject("filter", filter);
+        return modelAndView;
     }
 
 

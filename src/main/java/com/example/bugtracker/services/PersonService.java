@@ -76,6 +76,9 @@ public class PersonService {
         }
 
     }
+    public Person getByName(String name){
+        return personRepository.findByName(name).orElse(null);
+    }
 
 
 
