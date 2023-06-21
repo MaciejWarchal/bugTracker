@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class Bootstrap implements InitializingBean {
+public class Bootstrap {
 
     private final AuthorityRepository authorityRepository;
     private final PersonService personService;
@@ -23,7 +23,7 @@ public class Bootstrap implements InitializingBean {
     }
     //
 
-    @Override
+    /*@Override
     public void afterPropertiesSet() throws Exception {
         for (AuthorityType authorityType : AuthorityType.values()) {
             Optional<Authority> authority = authorityRepository.findByAuthority(authorityType);
@@ -35,7 +35,7 @@ public class Bootstrap implements InitializingBean {
         }
 
         personService.prepareAdminUser();
-    }
+    }*/
     }
 
 

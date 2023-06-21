@@ -42,7 +42,7 @@ public class DetailsService implements UserDetailsService {
 
         // Wysyłamy go do Spring Security w odpowiedniej formie
 
-        return new User(existingPerson.getUserRealName(),
+        return new User(existingPerson.getName(),
                 existingPerson.getPassword(),
                 authorities);
     }

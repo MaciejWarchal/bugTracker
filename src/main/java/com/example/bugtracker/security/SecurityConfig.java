@@ -7,7 +7,12 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 
@@ -56,5 +61,15 @@ public class SecurityConfig {
         return (web) -> web.debug(securityDebug)
                 .ignoring()
                 .requestMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/favicon.ico");
+    }
+
+    @Bean
+    public InMemoryUserDetailsManager userDetailsService() {
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        UserDetails user = User.withUsername("wsb")
+                .password(encoder.encode("secret"))
+                .roles("USER")
+                .build();
+        return new InMemoryUserDetailsManager(user);
     }
 }
