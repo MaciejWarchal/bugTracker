@@ -25,11 +25,19 @@ public class Person {
     private Boolean enabled;
     private Date dateCreated;
 
-    @ManyToMany
-            @JoinTable(name = "person_authorites",
-                        joinColumns = @JoinColumn(name = "person_id"),
-                        inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "person_authorities",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id"))
     Set<Authority> authorities;
+
+    public Person(String login, String password, String userRealName, String name, Boolean enabled, Date dateCreated) {
+        this.login = login;
+        this.password = password;
+        this.name = name;
+        this.enabled = enabled;
+        this.dateCreated = dateCreated;
+    }
 
 
 

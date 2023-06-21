@@ -1,14 +1,13 @@
 package com.example.bugtracker.controllers;
 
+import com.example.bugtracker.models.Authority.Authority;
 import com.example.bugtracker.models.Person.Person;
 import com.example.bugtracker.models.Project.Project;
+import com.example.bugtracker.repositories.AuthorityRepository;
 import com.example.bugtracker.services.PersonService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -17,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class PersonController {
 
     private final PersonService personService;
+    private final AuthorityRepository authorityRepository;
 
 
     @GetMapping
@@ -53,6 +53,11 @@ public class PersonController {
         } else {
             return "redirect:/projects/edit/" + person.getId();
         }
+    }
+
+    @GetMapping("/authorities")
+    public Iterable<Authority> getAuthorities(@RequestParam String username) {
+        return authorityRepository.findAllByUsername(username);
     }
 
 }

@@ -20,7 +20,7 @@ public class LoginController {
 
     @GetMapping("/login")
     ModelAndView login() {
-        ModelAndView modelAndView = new ModelAndView("projects1/index");
+        ModelAndView modelAndView = new ModelAndView("projects1/login");
 
         modelAndView.addObject("people", personService.getAll());
         return modelAndView;
