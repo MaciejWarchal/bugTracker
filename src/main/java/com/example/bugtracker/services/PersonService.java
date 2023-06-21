@@ -61,11 +61,17 @@ public class PersonService {
 
 
 
+
+
     public Iterable<Person> getAll(){
         return personRepository.findAll();
     }
 
-    public Person save(Person person){ return personRepository.save(person);}
+    public Person save(Person person){
+        String password= person.getPassword();
+        person.setPassword(password);
+
+        return personRepository.save(person);}
 
     public Person getOne(@PathVariable Long id){
         Person person= personRepository.findById(id).orElse(null);

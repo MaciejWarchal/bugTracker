@@ -18,4 +18,6 @@ public interface PersonRepository extends JpaRepository<Person,Long>, CrudReposi
     Iterable<Person> findAllByName(String s1);
 
     Iterable<Person> findAllByDateCreatedAfter(Date d);
+
+   // Person getPassword(Person person);
 }

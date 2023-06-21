@@ -12,9 +12,23 @@
 
 <h1 th:text="'Welcome ' + ${currentPerson.name}"></h1>
 
+
 <div class="container">
 
-    <
+    <form th:action="@{/person/save}" th:object="${currentPerson}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+
+        <p> Change name:<input type="text" class="form-control" id="user-name" th:field="*{name}"> </p>
+        <p> Change login:<input type="text" class="form-control" id="user-login" th:field="*{login}"> </p>
+        <p> Change password:<input type="text" class="form-control" id="user-password" th:field="*{password}"> </p>
+
+
+
+        <button type="submit" class="btn btn-primary">
+            save
+        </button>
+    </form>
 
 
 
