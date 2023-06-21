@@ -5,6 +5,8 @@ import com.example.bugtracker.models.Issue.Issue;
 import com.example.bugtracker.models.Person.Person;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.Instant;
@@ -22,6 +24,9 @@ public class Project {
     @Id
     @GeneratedValue
     private Long id;
+    @NotEmpty
+    @Size(min = 5, max = 255)
+    @Column(nullable = false, unique = true)
     protected String name;
 
     @OneToMany(mappedBy = "project")

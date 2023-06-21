@@ -57,6 +57,7 @@ public class PersonController {
 
 
     @GetMapping("/create")
+    @Secured("ROLE_CREATE_USER")
 
     ModelAndView create() {
         ModelAndView modelAndView = new ModelAndView("projects1/addPerson");
