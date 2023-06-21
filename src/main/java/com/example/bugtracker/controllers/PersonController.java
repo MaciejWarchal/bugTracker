@@ -6,6 +6,7 @@ import com.example.bugtracker.models.Project.Project;
 import com.example.bugtracker.repositories.AuthorityRepository;
 import com.example.bugtracker.services.PersonService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import static com.example.bugtracker.enums.AuthorityType.ROLE_CREATE_USER;
 
 @Controller
 @RequestMapping("/person")
@@ -54,6 +57,7 @@ public class PersonController {
 
 
     @GetMapping("/create")
+
     ModelAndView create() {
         ModelAndView modelAndView = new ModelAndView("projects1/addPerson");
         Person person= new Person();

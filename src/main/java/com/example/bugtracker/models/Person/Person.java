@@ -3,9 +3,12 @@ package com.example.bugtracker.models.Person;
 import com.example.bugtracker.models.Authority.Authority;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Data
@@ -48,4 +51,13 @@ public class Person {
             return false;
         }
     }
+
+    /*private List<GrantedAuthority> getUserAuthorities(Person person) {
+        Set<GrantedAuthority> grantedAuthorities;
+        grantedAuthorities = new HashSet<>();
+        for (Authority authority : person.authorities) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.name.toString()));
+        }
+        return new ArrayList<>(grantedAuthorities);
+    }*/
 }
