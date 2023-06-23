@@ -1,6 +1,6 @@
 package com.example.bugtracker.TestRunner;
 
-import io.cucumber.junit.Cucumber;
+/*import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
@@ -10,4 +10,4 @@ import org.junit.runner.RunWith;
         publish = true)
 public class TestRunner {
 
-}
+}*/

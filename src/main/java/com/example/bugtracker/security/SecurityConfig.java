@@ -1,10 +1,12 @@
 package com.example.bugtracker.security;
 
+import com.example.bugtracker.enums.AuthorityType;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.User;
@@ -39,7 +41,10 @@ public class SecurityConfig {
                 .requestMatchers("/contact").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").permitAll();
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .defaultSuccessUrl("/projects")
+                .permitAll();
 
         return httpSecurity.build();
     }
@@ -57,7 +62,7 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        boolean securityDebug = true;
+        boolean securityDebug = false;
         return (web) -> web.debug(securityDebug)
                 .ignoring()
                 .requestMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/favicon.ico");
@@ -66,9 +71,9 @@ public class SecurityConfig {
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        UserDetails user = User.withUsername("wsb")
-                .password(encoder.encode("secret"))
-                .roles("USER")
+        UserDetails user = User.withUsername("anotherUser")
+                .password(encoder.encode("12345"))
+                .roles("USERS_TAB")
                 .build();
         return new InMemoryUserDetailsManager(user);
     }

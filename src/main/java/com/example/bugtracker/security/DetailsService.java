@@ -28,7 +28,6 @@ public class DetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException
     {
-        // Pobieramy użytkownika z bazy
 
         Optional<Person> person = personRepository.findByName(userName);
 
@@ -40,7 +39,6 @@ public class DetailsService implements UserDetailsService {
 
         List<GrantedAuthority> authorities = findUserAuthorities(existingPerson);
 
-        // Wysyłamy go do Spring Security w odpowiedniej formie
 
         return new User(existingPerson.getName(),
                 existingPerson.getPassword(),
