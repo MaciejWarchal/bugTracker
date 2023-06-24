@@ -95,26 +95,25 @@ public class PersonController {
     ModelAndView authoritiesSet() {
         ModelAndView modelAndView = new ModelAndView("projects1/addAuthority");
 
-        String username = null;
-        String authority1 = null;
+
 
 
         modelAndView.addObject("people", personService.getAll());
-        modelAndView.addObject("username", username);
-        modelAndView.addObject("authority1", authority1);
+        modelAndView.addObject("username", new String());
+        modelAndView.addObject("authority1", new String());
 
 
         return modelAndView;
     }
-    @GetMapping("/authorities")
+    /*@GetMapping("/authorities")
     @Secured("ROLE_CREATE_USER")
     public Iterable<Authority> getAuthorities(@RequestParam String username) {
         return authorityService.getAllByUsername(username);
-    }
+    }*/
 
-    @PostMapping("{username}/authorities")
-    @Secured("ROLE_CREATE_USER")
-    public Person addAuthority(@PathVariable String username, @RequestParam String authority) {
+    @PostMapping("/authorities{username}")
+    //@Secured("ROLE_CREATE_USER")
+    public String addAuthority(@PathVariable String username, @RequestParam String authority) {
         // 1. Wyszukujemy użytkownika po username
 
         Optional<Person> optionalPerson = Optional.ofNullable(personService.getByName(username));
@@ -137,7 +136,8 @@ public class PersonController {
         // 4. Zapisujemy użytkownika
         personService.save(person);
 
-        return person;
+        return "redirect:/person";
+
     }
 
 }
