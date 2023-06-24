@@ -25,13 +25,13 @@ public class MailService {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
-            /*mimeMessageHelper.setTo(mail.recipient);
-            mimeMessageHelper.setSubject(mail.subject);
-            mimeMessageHelper.setText(mail.content);
+            mimeMessageHelper.setTo(mail.getRecipient());
+            mimeMessageHelper.setSubject(mail.getSubject());
+            mimeMessageHelper.setText(mail.getContent());
 
-            mimeMessageHelper.addAttachment(mail.attachment.getOriginalFilename(), mail.attachment);
+            mimeMessageHelper.addAttachment(mail.getAttachment().getOriginalFilename(), mail.getAttachment());
 
-            javaMailSender.send(mimeMessage);*/
+            javaMailSender.send(mimeMessage);
 
         } catch (Exception e) {
             System.out.println("Wysyłanie mejla nie powiodło się " + e);

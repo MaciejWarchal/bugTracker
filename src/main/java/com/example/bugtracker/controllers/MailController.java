@@ -20,13 +20,13 @@ public class MailController {
 
     @GetMapping
     String getForm() {
-        return "index";
+        return "projects1/indexMail";
     }
 
     @PostMapping
     String sendMail(@ModelAttribute Mail mail) {
         mailService.send(mail);
-        return "index";
+        return "projects1/indexMail";
     }
 
 
