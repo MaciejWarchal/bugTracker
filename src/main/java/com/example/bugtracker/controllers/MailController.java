@@ -26,7 +26,7 @@ public class MailController {
     @PostMapping
     String sendMail(@ModelAttribute Mail mail) {
         mailService.send(mail);
-        return "projects1/indexMail";
+        return "projects1/index";
     }
 
 

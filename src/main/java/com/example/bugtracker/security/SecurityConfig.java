@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/projects")
+                .defaultSuccessUrl("/projects",true)
                 .permitAll();
 
         return httpSecurity.build();

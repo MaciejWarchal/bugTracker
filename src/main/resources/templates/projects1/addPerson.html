@@ -24,8 +24,13 @@
     <p> User name:<input type="text" class="form-control" id="user-name" th:field="*{userRealName}"> </p>
     <p> User login:<input type="text" class="form-control" id="user-login" th:field="*{login}"> </p>
     <p> User password:<input type="text" class="form-control" id="user-password" th:field="*{password}"> </p>
-    <p> User authority:<input type="text" class="form-control" id="user-authority" th:field="*{authorities}"> </p>
 
+    <select th:field="*{a}">
+        <option th:value="'ToDo'" th:text="ToDo"></option>
+        <option th:value="'InProgress'" th:text="InProgress"></option>
+        <option th:value="'Fixed'" th:text="Fixed"></option>
+        <option th:value="'Closed'" th:text="Closed"></option>
+    </select>
 
     <button type="submit" class="btn btn-primary">
         save

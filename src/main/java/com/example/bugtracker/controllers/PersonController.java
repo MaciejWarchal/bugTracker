@@ -4,6 +4,7 @@ import com.example.bugtracker.models.Authority.Authority;
 import com.example.bugtracker.models.Person.Person;
 import com.example.bugtracker.models.Project.Project;
 import com.example.bugtracker.repositories.AuthorityRepository;
+import com.example.bugtracker.services.AuthorityService;
 import com.example.bugtracker.services.PersonService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.InvalidParameterException;
+import java.util.Optional;
+
 import static com.example.bugtracker.enums.AuthorityType.ROLE_CREATE_USER;
 
 @Controller
@@ -23,7 +27,7 @@ import static com.example.bugtracker.enums.AuthorityType.ROLE_CREATE_USER;
 public class PersonController {
 
     private final PersonService personService;
-    private final AuthorityRepository authorityRepository;
+    private final AuthorityService authorityService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
@@ -61,7 +65,10 @@ public class PersonController {
 
     ModelAndView create() {
         ModelAndView modelAndView = new ModelAndView("projects1/addPerson");
+
+
         Person person= new Person();
+
         modelAndView.addObject(person);
         return modelAndView;
     }
@@ -81,9 +88,56 @@ public class PersonController {
         }
     }
 
+
+
+    @GetMapping("/authoritiesSet")
+    @Secured("ROLE_CREATE_USER")
+    ModelAndView authoritiesSet() {
+        ModelAndView modelAndView = new ModelAndView("projects1/addAuthority");
+
+        String username = null;
+        String authority1 = null;
+
+
+        modelAndView.addObject("people", personService.getAll());
+        modelAndView.addObject("username", username);
+        modelAndView.addObject("authority1", authority1);
+
+
+        return modelAndView;
+    }
     @GetMapping("/authorities")
+    @Secured("ROLE_CREATE_USER")
     public Iterable<Authority> getAuthorities(@RequestParam String username) {
-        return authorityRepository.findAllByUsername(username);
+        return authorityService.getAllByUsername(username);
+    }
+
+    @PostMapping("{username}/authorities")
+    @Secured("ROLE_CREATE_USER")
+    public Person addAuthority(@PathVariable String username, @RequestParam String authority) {
+        // 1. Wyszukujemy użytkownika po username
+
+        Optional<Person> optionalPerson = Optional.ofNullable(personService.getByName(username));
+
+        if (optionalPerson.isEmpty()) {
+            throw new InvalidParameterException("Nie znaleźliśmy użytkownika");
+        }
+
+        // 2. Wyszykujemy uprawnienie po authority
+
+        Optional<Authority> optionalAuthorityInstance = Optional.ofNullable(authorityService.getAuthorityByAuthority(authority));
+        if (optionalAuthorityInstance.isEmpty()) {
+            throw new InvalidParameterException("Nie znaleźliśmy uprawnienia!");
+        }
+
+        // 3. Dodajemy to uprawnienie do listy uprawnień użytkownika
+        Person person = optionalPerson.get();
+        person.getAuthorities().add(optionalAuthorityInstance.get());
+
+        // 4. Zapisujemy użytkownika
+        personService.save(person);
+
+        return person;
     }
 
 }

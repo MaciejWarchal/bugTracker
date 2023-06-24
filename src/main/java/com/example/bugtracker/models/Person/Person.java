@@ -25,7 +25,7 @@ public class Person {
     private String password;
     private String userRealName;
     private String name;
-    private Boolean enabled;
+    private Boolean enabled=true;
     private Date dateCreated;
 
     @ManyToMany(cascade = CascadeType.MERGE)

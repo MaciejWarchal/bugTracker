@@ -56,15 +56,20 @@ public class ProjectController {
 
     @GetMapping("/create")
     ModelAndView create() {
+
+        Iterable<Person> people = personService.getAll();
         ModelAndView modelAndView = new ModelAndView("projects1/addProject");
+
 
         Project project = new Project();
         modelAndView.addObject("project", project);
+        modelAndView.addObject("people", people);
         return modelAndView;
     }
 
     @PostMapping("/save")
     String save(@ModelAttribute Project project) {
+
 
         boolean isNew = project.getId() == null;
         boolean statusChanged = true;

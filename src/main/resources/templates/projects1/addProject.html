@@ -110,17 +110,11 @@
             });
         </script>
 
-        <div class="col-md-4">
-            <label for="validationServerProject-creator" class="form-label">projectCreator</label>
-            <div class="input-group has-validation">
-                <span class="input-group-text" id="project-creator">@</span>
-                <input type="text" class="form-control is-invalid" id="validationServerProject-creator"
-                       aria-describedby="inputGroupPrepend3 validationServerProject-creatorFeedback"
-                       th:field="*{creator}"required>
-                <div id="validationServerProject-creatorFeedback" class="invalid-feedback">
-                    Please type Creator id.
-                </div>
-            </div>
+        <div>
+            <label for="creator">Project Creator:</label>
+            <select id="creator" name="creatorId" th:field="*{creator}">
+                <option th:each="person : ${people}" th:value="${person.id}" th:text="${person.name}"></option>
+            </select>
         </div>
 
         <button type="submit" class="btn btn-primary">
