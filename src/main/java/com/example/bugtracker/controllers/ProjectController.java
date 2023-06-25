@@ -12,6 +12,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -127,6 +129,8 @@ public class ProjectController {
     ModelAndView modelAndView(@ModelAttribute ProjectFilter filter, Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("projects1/listOfProjects");
 
+        pageable= PageRequest.of(0, 2, Sort.by("name").ascending());
+
         // Pobierz autentykację (zalogowanego użytkownika)
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentname = null;
@@ -138,7 +142,7 @@ public class ProjectController {
             }
         }
 
-        // Przekazuj obecny użytkownik do widoku
+        // Przekazuj obecnego użytkownika do widoku
         modelAndView.addObject("currentname", currentname);
 
         Page<Project> projects = projectService.getAll(filter.buildSpecification(), pageable);
