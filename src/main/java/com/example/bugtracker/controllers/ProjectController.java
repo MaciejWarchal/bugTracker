@@ -145,6 +145,10 @@ public class ProjectController {
         // Przekazuj obecnego użytkownika do widoku
         modelAndView.addObject("currentname", currentname);
 
+        // Update pageable with the sorting information
+        Sort sort = Sort.by("name").ascending();
+        pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
+
         Page<Project> projects = projectService.getAll(filter.buildSpecification(), pageable);
         modelAndView.addObject("projects", projects);
         Person person = personService.getOne(personService.getByName(currentname).getId());
@@ -153,6 +157,7 @@ public class ProjectController {
         modelAndView.addObject("filter", filter);
         return modelAndView;
     }
+
 
 
 
